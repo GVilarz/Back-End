@@ -4,5 +4,7 @@
 
 let anoAtual = 2026
 let anoNascimento = 2010
+
 let idade = anoAtual - anoNascimento
+
 console.log(idade) 
