@@ -44,3 +44,8 @@ const pi = 3.14;
 // - Palavras separadas por underline
 
 // let nome_completo, let total_vendas;
+// _______________________________________________________________
+
+// Template String
+let idade2 = 10
+console.log(`Sua idade é: ${idade2} anos.`)
