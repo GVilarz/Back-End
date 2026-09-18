@@ -9,3 +9,25 @@
 // Array (listas de valores)
 // Null (Valor vazio)
 // Undefined (quando algo não foi definido)
+
+// String (textos)
+// Uma string é um texto, sempre escrito entre aspas ("" ou '')
+let nome = "jarvis"
+let mensagem = 'Hello, World!';
+
+// console.log(nome);
+// console.log(mensagem);
+
+let saudacao = "Ola, " + nome + "!";
+console.log(saudacao);
+// Exibir "Olá, jarvis!"
+
+// typeof
+// o typeof serve para descobrir o tipo de um valor ou variavel
+// let nomeDois = "Bryan - Não pode fone de ouvido!";
+// let nometres = "Vilar - Não pode celular!";
+// console.log(typeof nomeDois);
+// console.log(typeof nometres);
+
+let soma = 10 + 5;
+console.log(typeof soma); // Exibir number
