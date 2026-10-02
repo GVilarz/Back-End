@@ -25,5 +25,11 @@ function alterar() {
     titulo.innerHTML = "Gato Reliquia"
     subtitulo.innerText = "GLife Fundador"
     paragrafo.innerHTML = "Cookie e Jujuba"
-    
+
+    // Alterando elemento da classe
+    caixa[0].innerText = "Primeiro paragrafo alterado"
+    caixa[1].innerText = "Segundo paragrafo alterado"
+
+    // Alterando imagem
+    imagem.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTbKsj_ju7MkU5dDFlTBKu7BjzzuozVTGenBTF3gu9LQ&s=10"
 }
