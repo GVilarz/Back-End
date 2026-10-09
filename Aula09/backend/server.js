@@ -20,6 +20,7 @@ const fs = require("fs")
 const path = require("path")
 // Importa o arquivo JSON que contém as raças e fotos
 const cachorros = require("./data/dogs.json")
+const { log } = require("console")
 // cria a aplicação Express
 const app = express()
 // definir a porta onde o servidor irá rodar
@@ -74,7 +75,7 @@ app.get("/api/cachorros/aleatorio", (req, res) => {
 // object.values pega os valores do objetos
 // flat transforma tudo em um único array
 const todasAsFotos = Object.values(cachorros).flat()
-})
+
 
 // Sorteia uma foto aleatoria
 const item = sortear(todasAsFotos)
@@ -85,6 +86,7 @@ res.json({
     status: "success",
     // URL da iagem que foi sorteada
     message: `http://localhost:${PORT}/fotos/${item}`
+})
 })
 
 // ROTA 2 - Cachorro por raça
@@ -119,4 +121,16 @@ app.get("/api/cachorros/:raca", (req, res) => {
         status: "success",
         message: `http://localhost:${PORT}/fotos/${item}`
     })
+})
+
+//====================================
+// INICIA O SERVIDOR
+//====================================
+
+// Inicia o servidor express
+app.listen(PORT, () => {
+    console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
+    console.log(`📂 Coloque as fotos manualmente em: data/fotos/`);
+    
+    
 })
