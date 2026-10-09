@@ -1,0 +1,274 @@
+/*
+=====================================
+ESTILIZAÇÃO DA PÁGINA
+CSS responsável pelo layout da aplicação
+=====================================
+*/
+
+
+/* 
+* seleciona TODOS os elementos da página
+usado normalmente para resetar estilos padrão do navegador
+*/
+* {
+
+    /* remove margens padrão */
+    margin: 0;
+
+    /* remove espaçamento interno padrão */
+    padding: 0;
+
+    /* faz o cálculo do tamanho incluir padding e borda */
+    box-sizing: border-box;
+}
+
+
+body {
+
+    /* define a fonte do site */
+    font-family: Arial, Helvetica, sans-serif;
+
+    /* cria um fundo em gradiente (degradê) */
+    background: linear-gradient(135deg, #667eea, #764ba2);
+
+    /* altura mínima da tela = 100% da viewport */
+    min-height: 100vh;
+
+    /* ativa o Flexbox */
+    display: flex;
+
+    /* centraliza horizontalmente */
+    justify-content: center;
+
+    /* centraliza verticalmente */
+    align-items: center;
+
+    /* espaçamento interno nas bordas da tela */
+    padding: 20px;
+}
+
+
+.container {
+
+    /* largura máxima do conteúdo */
+    max-width: 800px;
+
+    /* ocupa 100% até chegar no limite */
+    width: 100%;
+
+    /* fundo branco */
+    background: white;
+
+    /* espaço interno */
+    padding: 30px;
+
+    /* arredonda os cantos */
+    border-radius: 20px;
+
+    /* sombra do card */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+
+h1 {
+
+    /* centraliza o título */
+    text-align: center;
+
+    /* espaço abaixo do título */
+    margin-bottom: 10px;
+}
+
+
+.subtitle {
+
+    /* centraliza o subtítulo */
+    text-align: center;
+
+    /* espaço abaixo */
+    margin-bottom: 30px;
+
+    /* cor do texto */
+    color: #666;
+}
+
+
+.dog-area {
+
+    /* fundo da área da imagem */
+    background: #f5f5f5;
+
+    /* cantos arredondados */
+    border-radius: 15px;
+
+    /* espaço interno */
+    padding: 20px;
+
+    /* espaço abaixo da área */
+    margin-bottom: 20px;
+
+    /* altura mínima */
+    min-height: 400px;
+
+    /* ativa Flexbox */
+    display: flex;
+
+    /* centraliza horizontalmente */
+    justify-content: center;
+
+    /* centraliza verticalmente */
+    align-items: center;
+
+    /* necessário para posicionar elementos absolutos dentro */
+    position: relative;
+}
+
+
+#dogImage {
+
+    /* largura da imagem ocupa 100% do container */
+    width: 100%;
+
+    /* altura máxima */
+    max-height: 400px;
+
+    /* mantém proporção da imagem */
+    object-fit: contain;
+
+    /* borda arredondada */
+    border-radius: 10px;
+
+    /* muda o cursor para indicar clique */
+    cursor: pointer;
+}
+
+
+#breedName {
+
+    /* posicionamento absoluto dentro da .dog-area */
+    position: absolute;
+
+    /* distância da parte inferior */
+    bottom: 20px;
+
+    /* distância da esquerda */
+    left: 20px;
+
+    /* fundo semi-transparente */
+    background: rgba(0,0,0,0.7);
+
+    /* cor do texto */
+    color: white;
+
+    /* espaço interno */
+    padding: 6px 14px;
+
+    /* formato arredondado */
+    border-radius: 20px;
+}
+
+
+/* 
+.container dos botões
+.controls e .search compartilham o mesmo estilo
+*/
+.controls,
+.search {
+
+    /* ativa flexbox */
+    display: flex;
+
+    /* espaço entre elementos */
+    gap: 10px;
+
+    /* espaço abaixo */
+    margin-bottom: 15px;
+}
+
+
+button {
+
+    /* faz todos os botões ocuparem o mesmo espaço */
+    flex: 1;
+
+    /* altura e espaço interno */
+    padding: 12px;
+
+    /* remove borda padrão */
+    border: none;
+
+    /* borda arredondada */
+    border-radius: 8px;
+
+    /* cor de fundo */
+    background: #764ba2;
+
+    /* cor do texto */
+    color: white;
+
+    /* deixa o texto mais grosso */
+    font-weight: bold;
+
+    /* cursor de botão */
+    cursor: pointer;
+}
+
+
+button:hover {
+
+    /* muda a cor quando o mouse passa por cima */
+    background: #667eea;
+}
+
+
+input {
+
+    /* ocupa mais espaço que o botão */
+    flex: 2;
+
+    /* espaço interno */
+    padding: 12px;
+
+    /* borda arredondada */
+    border-radius: 8px;
+
+    /* borda cinza */
+    border: 2px solid #ddd;
+
+    /* tamanho da fonte */
+    font-size: 16px;
+}
+
+
+/* classe usada quando a API está carregando */
+.loading {
+
+    /* deixa a área um pouco transparente */
+    opacity: 0.6;
+
+    /* bloqueia cliques durante o carregamento */
+    pointer-events: none;
+}
+
+
+/* cria um pseudo-elemento depois do elemento */
+.loading::after {
+
+    /* texto exibido */
+    content: "Carregando...";
+
+    /* posicionamento absoluto */
+    position: absolute;
+
+    /* fundo preto */
+    background: black;
+
+    /* cor do texto */
+    color: white;
+
+    /* espaço interno */
+    padding: 10px 20px;
+
+    /* borda arredondada */
+    border-radius: 20px;
+}
