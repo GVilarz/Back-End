@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Minhas Tarefas</title>
+  <style>
+    body { font-family: Arial; max-width: 450px; margin: 40px auto; }
+    li { padding: 8px 0; }
+    .feita { text-decoration: line-through; color: #999; } /* tarefa feita fica riscada */
+  </style>
+</head>
+<body>
+
+  <h1>Minhas Tarefas</h1>
+
+  <!-- Campo + botão para criar tarefa -->
+  <input id="campoTitulo" placeholder="Nova tarefa...">
+  <button onclick="criarTarefa()">Adicionar</button>
+
+
+  <!-- O JavaScript desenha as tarefas aqui dentro -->
+  <ul id="listaTarefas"></ul>
+
+
+  <script>
+    
+    const url = '/tarefas';   // endereço da API no servidor
+
+    
+    // Pega os elementos da página para podermos usar no JavaScript
+    const campoTitulo = document.getElementById('campoTitulo');
+    const listaTarefas = document.getElementById('listaTarefas');
+
+
+    // ========== CREATE (criar) ==========
+    async function criarTarefa() {
+      // Envia o título para o servidor (POST)
+      await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },   // "estou enviando JSON"
+        body: JSON.stringify({ titulo: campoTitulo.value })  // transforma o objeto em texto JSON
+      });
+
+      campoTitulo.value = '';   // limpa o campo
+      listarTarefas();          // atualiza a lista na tela
+    }
+
+    // ========== READ (ler) ==========
+    async function listarTarefas() {
+      // Pede as tarefas para o servidor (GET)
+      const resposta = await fetch(url);
+      const tarefas = await resposta.json();   // transforma a resposta em uma lista
+
+      listaTarefas.innerHTML = '';             // limpa a lista antes de desenhar de novo
+
+      // Para cada tarefa da lista, cria os elementos na tela
+      tarefas.forEach((tarefa) => {
+        const item = document.createElement('li');
+
+        // Caixinha para marcar como feita
+        const caixinha = document.createElement('input');
+        caixinha.type = 'checkbox';
+        caixinha.checked = tarefa.concluida === 1;   // marcada se concluida for 1
+        caixinha.onchange = () => {
+          // Se marcou envia 1, se desmarcou envia 0
+          atualizarTarefa(tarefa.id, caixinha.checked ? 1 : 0);
+        };
+
+        // Texto da tarefa (riscado se estiver feita)
+        const texto = document.createElement('span');
+        texto.textContent = ' ' + tarefa.titulo + ' ';
+        if (tarefa.concluida === 1) {
+          texto.className = 'feita';
+        }
+
+        // Botão para apagar
+        const botaoApagar = document.createElement('button');
+        botaoApagar.textContent = 'Apagar';
+        botaoApagar.onclick = () => apagarTarefa(tarefa.id);
+
+        // Coloca tudo dentro do <li> e o <li> dentro da lista
+        item.append(caixinha, texto, botaoApagar);
+        listaTarefas.appendChild(item);
+      });
+    }
+  
+    // ========== UPDATE (atualizar) ==========
+    async function atualizarTarefa(id, concluida) {
+      // Envia o novo valor para o servidor (PUT). O id vai no endereço: /tarefas/5
+      await fetch(url + '/' + id, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ concluida: concluida })
+      });
+
+      listarTarefas();   // atualiza a lista na tela
+    }
+
+    // ========== DELETE (apagar) ==========
+    async function apagarTarefa(id) {
+      // Pede para o servidor apagar (DELETE). O id vai no endereço: /tarefas/5
+      await fetch(url + '/' + id, { method: 'DELETE' });
+
+      listarTarefas();   // atualiza a lista na tela
+    }
+
+    // Quando a página abre, já mostra as tarefas
+    listarTarefas();
+   
+  </script>
+</body>
+</html>
